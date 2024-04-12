@@ -11,8 +11,6 @@ import 'package:receipe_app/ui/views/new_dish/new_dish_view.form.dart';
 import 'package:receipe_app/ui/widgets/common/app_drawer/app_drawer.dart';
 import 'package:receipe_app/ui/widgets/common/primary_button/primary_button.dart';
 import 'package:stacked/stacked.dart';
-import 'package:receipe_app/ui/extension/app_typography.dart';
-import 'package:receipe_app/ui/extension/palette.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'new_dish_viewmodel.dart';
 
@@ -32,9 +30,6 @@ class NewDishView extends StackedView<NewDishViewModel> with $NewDishView {
     NewDishViewModel viewModel,
     Widget? child,
   ) {
-    final ThemeData theme = Theme.of(context);
-    final AppTypography? typography = theme.extension<AppTypography>();
-    final Palette? palette = theme.extension<Palette>();
     final newDishScaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
@@ -63,7 +58,8 @@ class NewDishView extends StackedView<NewDishViewModel> with $NewDishView {
         ),
         title: Text(
           S.current.create_a_dish,
-          style: typography?.titleBold16?.copyWith(color: palette?.gray11),
+          style: context.typography?.titleBold16
+              ?.copyWith(color: context.palette?.gray11),
         ),
       ),
       body: Builder(builder: (context) {
@@ -75,8 +71,8 @@ class NewDishView extends StackedView<NewDishViewModel> with $NewDishView {
               children: [
                 Text(
                   S.current.create_a_dish_intro,
-                  style: typography?.titleRegular16
-                      ?.copyWith(color: palette?.gray8),
+                  style: context.typography?.titleRegular16
+                      ?.copyWith(color: context.palette?.gray8),
                 ),
                 SizedBox(
                   height: 20.h,
