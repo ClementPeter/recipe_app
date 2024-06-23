@@ -300,11 +300,91 @@ class S {
     );
   }
 
-  /// `Required`
-  String get required {
+  /// `Password Required`
+  String get password_required {
     return Intl.message(
-      'Required',
-      name: 'required',
+      'Password Required',
+      name: 'password_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number cannot be empty`
+  String get phone_number_empty {
+    return Intl.message(
+      'Phone Number cannot be empty',
+      name: 'phone_number_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phone_number {
+    return Intl.message(
+      'Phone Number',
+      name: 'phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field is required`
+  String get field_required {
+    return Intl.message(
+      'Field is required',
+      name: 'field_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number not complete`
+  String get phone_number_not_complete {
+    return Intl.message(
+      'Phone number not complete',
+      name: 'phone_number_not_complete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is too short`
+  String get password_too_short {
+    return Intl.message(
+      'Password is too short',
+      name: 'password_too_short',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First name is required`
+  String get first_name_required {
+    return Intl.message(
+      'First name is required',
+      name: 'first_name_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last name is required`
+  String get last_name_required {
+    return Intl.message(
+      'Last name is required',
+      name: 'last_name_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The phone number is invalid`
+  String get phone_number_invalid {
+    return Intl.message(
+      'The phone number is invalid',
+      name: 'phone_number_invalid',
       desc: '',
       args: [],
     );
@@ -315,6 +395,16 @@ class S {
     return Intl.message(
       'Kindly edit the details below to the reflect the right standard dish information',
       name: 'kindly_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kindly fill the form to create a Kally Dish account`
+  String get kindly_fill_form {
+    return Intl.message(
+      'Kindly fill the form to create a Kally Dish account',
+      name: 'kindly_fill_form',
       desc: '',
       args: [],
     );

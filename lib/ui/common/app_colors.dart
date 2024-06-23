@@ -21,6 +21,7 @@ class AppColors {
   static const Color primary11 = Color(0xFF331604);
   static const Color grey13 = Color(0xFFE8E8E8);
   static const Color redShade = Color(0xFFCC444B);
+  static const Color paleRed = Color(0xFFFFE3E0);
   static const Color popUpBg = Color(0xFFF5F5F5);
   static const Color orangeShade = Color(0xFFFFF3EC);
   static const Color barrierColor = Color(0x99454545);

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:receipe_app/services/localization_service.dart';
+import 'package:receipe_app/ui/snackbar/custom_snackbar.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'app/app.bottomsheets.dart';
 import 'app/app.dialogs.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
+  setupAuthSnackbarUI();
   await S.load(const Locale.fromSubtags(languageCode: 'en'));
   runApp(const MainApp());
 }

@@ -3,7 +3,9 @@ import 'package:receipe_app/app/app.logger.dart';
 import 'package:receipe_app/app/app.router.dart';
 import 'package:receipe_app/data_model/login_model.dart';
 import 'package:receipe_app/data_model/login_response.dart';
+import 'package:receipe_app/enums/snackbar_type.dart';
 import 'package:receipe_app/exceptions/receipe_exceptions.dart';
+import 'package:receipe_app/generated/l10n.dart';
 import 'package:receipe_app/services/authentication_service.dart';
 import 'package:receipe_app/ui/views/login/login_view.form.dart';
 import 'package:stacked/stacked.dart';
@@ -13,12 +15,26 @@ class LoginViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _dialogService = locator<DialogService>();
+  final _snackbarService = locator<SnackbarService>();
   final _logger = getLogger('LoginViewModel');
+
   bool hidePassword = true;
+
+  String? loginEmailValidatorValue;
+  String? loginPasswordValidatorValue;
 
   void toggleVisibility() {
     hidePassword = !hidePassword;
     rebuildUi();
+  }
+
+  void showLoginSnackBar(String? value) {
+    _snackbarService.showCustomSnackBar(
+      message: value!,
+      variant: SnackbarType.custom,
+      duration: const Duration(seconds: 1),
+    );
+    _snackbarService.closeSnackbar();
   }
 
   Future<void> login() async {
@@ -33,7 +49,7 @@ class LoginViewModel extends FormViewModel {
       );
       if (response == null) {
         _dialogService.showDialog(
-          description: "Unknown error",
+          description: S.current.unknown_error,
         );
         return;
       }
@@ -48,7 +64,7 @@ class LoginViewModel extends FormViewModel {
     } catch (e, s) {
       _logger.e('An error occurred while login in', e, s);
       _dialogService.showDialog(
-        description: "Unknown error",
+        description: S.current.unknown_error,
       );
     } finally {
       setBusy(false);

@@ -76,20 +76,25 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                     focusNode: emailFocusNode,
                     autofillHints: const [AutofillHints.email],
                     keyboardType: TextInputType.emailAddress,
-                    validator: Validation.validateEmail,
+                    //validator: Validation.validateEmail,
+                    validator: (value) {
+                      return viewModel.loginEmailValidatorValue =
+                          Validation.validateEmail(value);
+                    },
                     decoration: InputDecoration(
                       labelText: S.current.email_address,
                       hintText: S.current.enter_your_email,
                     ),
                   ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
+                  SizedBox(height: 16.h),
                   TextFormField(
                     controller: passwordController,
                     focusNode: passwordFocusNode,
                     obscureText: viewModel.hidePassword,
-                    validator: Validation.validateField,
+                    validator: (value) {
+                      return viewModel.loginPasswordValidatorValue =
+                          Validation.validatePassword(value);
+                    },
                     decoration: InputDecoration(
                       labelText: S.current.password,
                       hintText: S.current.enter_your_password,
@@ -112,8 +117,13 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                   PrimaryButton(
                     buttonText: S.current.login,
                     onTap: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        viewModel.login();
+                      if (_formKey.currentState?.validate() == false) {
+                        viewModel.showLoginSnackBar(
+                          viewModel.loginEmailValidatorValue ??
+                              viewModel.loginPasswordValidatorValue,
+                        );
+                      } else {
+                        //viewModel.login();
                       }
                     },
                   ),

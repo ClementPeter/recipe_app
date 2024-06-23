@@ -42,6 +42,7 @@ import 'package:receipe_app/services/localization_service.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: SnackbarService),
     LazySingleton(classType: EventService),
     LazySingleton(classType: SecureStorageService),
     LazySingleton(classType: DioService),

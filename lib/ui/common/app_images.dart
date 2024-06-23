@@ -15,6 +15,7 @@ class AppImages {
   static String likedIcon = 'assets/svg/heart_fil.svg';
   static String unlikedIcon = 'assets/svg/heart.svg';
   static String addcon = 'assets/svg/add.svg';
+  static String cancel = 'assets/svg/cancel.svg';
   static String lottie = 'assets/gif/lottie.svg';
   static String home = "assets/svg/home.svg";
   static String moon = "assets/svg/moon.svg";

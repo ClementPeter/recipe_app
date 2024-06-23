@@ -2,6 +2,7 @@ import 'package:receipe_app/app/app.locator.dart';
 import 'package:receipe_app/app/app.logger.dart';
 import 'package:receipe_app/data_model/register_model.dart';
 import 'package:receipe_app/data_model/user.dart';
+import 'package:receipe_app/enums/snackbar_type.dart';
 import 'package:receipe_app/exceptions/receipe_exceptions.dart';
 import 'package:receipe_app/services/authentication_service.dart';
 import 'package:receipe_app/ui/views/signup/signup_view.form.dart';
@@ -12,8 +13,15 @@ class SignupViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   final _dialogService = locator<DialogService>();
+  final _snackbarService = locator<SnackbarService>();
+
   final _logger = getLogger('SignupViewModel');
   bool hidePassword = true;
+
+  String? firstNameValidatorValue;
+  String? lastNameValidatorValue;
+  String? signUpEmailValidatorValue;
+  String? signUpPasswordValidatorValue;
 
   void togglePassword() {
     hidePassword = !hidePassword;
@@ -22,6 +30,15 @@ class SignupViewModel extends FormViewModel {
 
   void actionRouteToLoginView() {
     _navigationService.back();
+  }
+
+  void showSignUpSnackbar(String? value) {
+    _snackbarService.showCustomSnackBar(
+      message: value!,
+      variant: SnackbarType.custom,
+      duration: const Duration(seconds: 1),
+    );
+    _snackbarService.closeSnackbar();
   }
 
   Future<void> signup() async {

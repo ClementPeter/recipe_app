@@ -38,9 +38,10 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
           isBusy: viewModel.isBusy,
           content: SingleChildScrollView(
             padding: EdgeInsets.only(
-                left: sidePadding,
-                right: sidePadding,
-                bottom: sidePadding + 20.h),
+              left: sidePadding,
+              right: sidePadding,
+              bottom: sidePadding + 20.h,
+            ),
             child: Form(
               key: _signupKey,
               child: Column(
@@ -66,7 +67,7 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Kindly fill the form to create a Kally Dish account",
+                      S.current.kindly_fill_form,
                       style: context.typography?.titleRegular16
                           ?.copyWith(color: context.palette?.gray8),
                     ),
@@ -77,7 +78,13 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                   TextFormField(
                     controller: firstNameController,
                     focusNode: firstNameFocusNode,
-                    validator: Validation.validateField,
+                    validator: (value) {
+                      return viewModel.firstNameValidatorValue =
+                          Validation.validateField(
+                        value,
+                        errorMessage: S.current.first_name_required,
+                      );
+                    },
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: S.current.first_name,
@@ -90,7 +97,13 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                   TextFormField(
                     controller: lastNameController,
                     focusNode: lastNameFocusNode,
-                    validator: Validation.validateField,
+                    validator: (value) {
+                      return viewModel.lastNameValidatorValue =
+                          Validation.validateField(
+                        value,
+                        errorMessage: S.current.last_name_required,
+                      );
+                    },
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       labelText: S.current.last_name,
@@ -106,7 +119,10 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                     autofillHints: const [AutofillHints.email],
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    validator: Validation.validateEmail,
+                    validator: (value) {
+                      return viewModel.signUpEmailValidatorValue =
+                          Validation.validateEmail(value);
+                    },
                     decoration: InputDecoration(
                         labelText: S.current.email_address,
                         hintText: S.current.enter_your_email),
@@ -119,7 +135,10 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                     focusNode: passwordFocusNode,
                     obscureText: viewModel.hidePassword,
                     textInputAction: TextInputAction.next,
-                    validator: Validation.validateField,
+                    validator: (value) {
+                      return viewModel.signUpPasswordValidatorValue =
+                          Validation.validatePassword(value);
+                    },
                     decoration: InputDecoration(
                       labelText: S.current.password,
                       hintText: S.current.enter_your_password,
@@ -145,10 +164,13 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                     autofillHints: const [AutofillHints.telephoneNumber],
                     keyboardType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
-                    validator: Validation.validateField,
+                    validator: (value) {
+                      return viewModel.signUpPasswordValidatorValue =
+                          Validation.validatePhoneNumber(value);
+                    },
                     decoration: InputDecoration(
-                      labelText: "Phone number",
-                      hintText: "Enter phone number",
+                      labelText: S.current.phone_number,
+                      hintText: "080...",
                     ),
                   ),
                   SizedBox(
@@ -157,8 +179,15 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                   PrimaryButton(
                     buttonText: S.current.sign_up,
                     onTap: () {
-                      if (_signupKey.currentState?.validate() ?? false) {
-                        viewModel.signup();
+                      if (_signupKey.currentState?.validate() == false) {
+                        viewModel.showSignUpSnackbar(
+                          viewModel.firstNameValidatorValue ??
+                              viewModel.lastNameValidatorValue ??
+                              viewModel.signUpEmailValidatorValue ??
+                              viewModel.signUpPasswordValidatorValue,
+                        );
+                      } else {
+                        //viewModel.signup();
                       }
                     },
                   ),
