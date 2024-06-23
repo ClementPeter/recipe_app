@@ -187,7 +187,7 @@ class SignupView extends StackedView<SignupViewModel> with $SignupView {
                               viewModel.signUpPasswordValidatorValue,
                         );
                       } else {
-                        //viewModel.signup();
+                        viewModel.signup();
                       }
                     },
                   ),

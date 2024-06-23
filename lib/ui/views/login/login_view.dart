@@ -123,7 +123,7 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                               viewModel.loginPasswordValidatorValue,
                         );
                       } else {
-                        //viewModel.login();
+                        viewModel.login();
                       }
                     },
                   ),
